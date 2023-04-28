@@ -1,18 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
-import { useRecoilState } from "recoil";
-import { getUserData } from "../../../util/api";
-import { selectDateState } from "../../../util/atom";
+import { Dispatch, SetStateAction } from "react";
+import { userType } from "../../../types/types";
 import UserHeader from "./UserHeader";
 import UserList from "./UserList";
 
-function UserBody() {
-  const [userDate, setUserDate] = useRecoilState(selectDateState);
-
-  const { data: userData } = useQuery(["userDate", userDate], getUserData, {
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 10,
-  });
-
+function UserBody({
+  userData,
+  userDate,
+  setUserDate,
+}: {
+  userData: userType[];
+  userDate: string;
+  setUserDate: Dispatch<SetStateAction<string>>;
+}) {
   return (
     <div>
       <UserHeader userLength={userData?.length} setUserDate={setUserDate} />

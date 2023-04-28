@@ -1,10 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import CarouselSlide from "../components/main/ads/CarouselSlide";
 import Memo from "../components/main/memo/Memo";
 import SearchBody from "../components/main/search/SearchBody";
 import UserBody from "../components/main/users/UserBody";
+import { getUserData } from "../util/api";
+import { selectDateState } from "../util/atom";
 
 function Main() {
+  const [userDate, setUserDate] = useRecoilState(selectDateState);
+
+  const { data: userData } = useQuery(["userDate", userDate], getUserData, {
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 10,
+  });
   return (
     <Wrap>
       <AdsWrap>
@@ -12,10 +22,14 @@ function Main() {
         <Memo />
       </AdsWrap>
       <UserWrap>
-        <UserBody />
+        <UserBody
+          userData={userData}
+          userDate={userDate}
+          setUserDate={setUserDate}
+        />
       </UserWrap>
       <SearchWrap>
-        <SearchBody />
+        <SearchBody userData={userData} />
       </SearchWrap>
     </Wrap>
   );
