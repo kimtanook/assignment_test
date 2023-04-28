@@ -22,7 +22,7 @@ function SearchList({
     } else if (optionValue === "phone") {
       return item?.phone === searchValue;
     } else {
-      return item?.patDob === searchValue;
+      return item?.patDob?.slice(0, 6) === searchValue;
     }
   });
   return (

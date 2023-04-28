@@ -82,7 +82,7 @@ const Wrap = styled.div<{
       ? "aqua"
       : phone === searchValue
       ? "aqua"
-      : patDob === searchValue
+      : patDob?.slice(0, 6) === searchValue
       ? "aqua "
       : "white"};
 `;

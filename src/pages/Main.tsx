@@ -3,13 +3,21 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import CarouselSlide from "../components/main/ads/CarouselSlide";
 import Memo from "../components/main/memo/Memo";
-import SearchBody from "../components/main/search/SearchBody";
-import UserBody from "../components/main/users/UserBody";
+import SearchHeader from "../components/main/search/SearchHeader";
+import SearchList from "../components/main/search/SearchList";
+import UserHeader from "../components/main/users/UserHeader";
+import UserList from "../components/main/users/UserList";
 import { getUserData } from "../util/api";
-import { selectDateState } from "../util/atom";
+import {
+  searchOptionState,
+  searchValueState,
+  selectDateState,
+} from "../util/atom";
 
 function Main() {
   const [userDate, setUserDate] = useRecoilState(selectDateState);
+  const [optionValue, setOptionValue] = useRecoilState(searchOptionState);
+  const [searchValue, setSearchValue] = useRecoilState(searchValueState);
 
   const { data: userData } = useQuery(["userDate", userDate], getUserData, {
     staleTime: 1000 * 60 * 5,
@@ -22,14 +30,19 @@ function Main() {
         <Memo />
       </AdsWrap>
       <UserWrap>
-        <UserBody
-          userData={userData}
-          userDate={userDate}
-          setUserDate={setUserDate}
-        />
+        <UserHeader userLength={userData?.length} setUserDate={setUserDate} />
+        <UserList userData={userData} userDate={userDate} />
       </UserWrap>
       <SearchWrap>
-        <SearchBody userData={userData} />
+        <SearchHeader
+          setOptionValue={setOptionValue}
+          setSearchValue={setSearchValue}
+        />
+        <SearchList
+          userData={userData}
+          optionValue={optionValue}
+          searchValue={searchValue}
+        />
       </SearchWrap>
     </Wrap>
   );
