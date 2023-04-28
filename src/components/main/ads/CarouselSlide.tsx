@@ -94,14 +94,14 @@ const AdsTitle = styled.div`
 `;
 const AfterBtn = styled.div`
   cursor: pointer;
-  position: absolute;
-  top: 190px;
+  position: relative;
+  top: -200px;
   left: 480px;
 `;
 const BeforeBtn = styled.div`
   cursor: pointer;
-  position: absolute;
-  top: 190px;
+  position: relative;
+  top: -240px;
   left: 40px;
 `;
 const ArrowImg = styled.img`

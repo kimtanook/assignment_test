@@ -56,7 +56,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 540px;
-  height: 400px;
+  height: 340px;
   border: 1px solid black;
   margin: 260px auto auto auto;
 `;
