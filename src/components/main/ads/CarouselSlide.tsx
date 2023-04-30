@@ -93,12 +93,14 @@ const AdsTitle = styled.div`
   text-align: center;
 `;
 const AfterBtn = styled.div`
+  width: 40px;
   cursor: pointer;
   position: relative;
   top: -200px;
   left: 480px;
 `;
 const BeforeBtn = styled.div`
+  width: 40px;
   cursor: pointer;
   position: relative;
   top: -240px;
